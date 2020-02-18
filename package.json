@@ -1,0 +1,10 @@
+{
+    "name":"setupapp",
+    "version": "1.0.0",
+    "prettier":{
+        "semi": true,
+        "trailingComma": "all",
+        "singleQuote": true,
+        "printWidth": 70
+    }
+}
