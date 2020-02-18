@@ -1,10 +1,13 @@
 {
-    "name":"setupapp",
+    "name": "setupapp",
     "version": "1.0.0",
-    "prettier":{
+    "prettier": {
         "semi": true,
         "trailingComma": "all",
         "singleQuote": true,
         "printWidth": 70
+    },
+    "dependencies": {
+        "express": "^4.17.1"
     }
 }
