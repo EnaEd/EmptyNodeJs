@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon --inspect ."
+    "start": "nodemon --inspect .",
+    "watch": "nodemon"
   },
   "prettier": {
     "semi": true,
