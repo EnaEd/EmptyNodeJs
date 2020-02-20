@@ -9,5 +9,3 @@ console.log(`test envir = ${process.env['TEST']} 323`);
 app.listen(3000, () =>
   console.log(`test envir = ${process.env['TEST']} 32`),
 );
-
-console.log('test');
