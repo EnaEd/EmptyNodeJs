@@ -1,5 +1,5 @@
 {
-  "main": "dist/app.js",
+  "main": "dist/app",
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
@@ -29,8 +29,8 @@
     "koa": "^2.11.0"
   },
   "devDependencies": {
-    "@types/node": "^13.7.1",
     "@types/koa": "2.0.45",
+    "@types/node": "^13.7.1",
     "nodemon": "^2.0.2",
     "tslint": "^6.0.0",
     "typescript": "^3.7.5"

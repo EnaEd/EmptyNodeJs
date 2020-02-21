@@ -1,9 +1,9 @@
-import express from 'express';
+import koa from 'koa';
 
-const app = express();
+const app = new koa();
 
-app.get('/', (req, res) => {
-  res.send('hello world');
+app.use(async ctx => {
+  ctx.body('hello world');
 });
 console.log(`test envir = ${process.env['TEST']} 323`);
 app.listen(3000, () =>
