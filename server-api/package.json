@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "nodemon --inspect .",
-    "watch": "nodemon"
+    "start": "node --inspect -r dotenv/config dist/app.js",
+    "build:launch": "tsc && npm run start",
+    "watch": "nodemon --watch src --ignore 'src/**/*.spec.ts' -e ts --exec npm run build:launch"
   },
   "prettier": {
     "semi": true,
