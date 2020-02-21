@@ -13,6 +13,16 @@
     "singleQuote": true,
     "printWidth": 70
   },
+  "nodemon": {
+    "watch": [
+      "src"
+    ],
+    "ext": "ts",
+    "ignore": [
+      "src/**/*.spec.ts"
+    ],
+    "exec": "tsc && node --inspect dist/app.js"
+  },
   "dependencies": {
     "core-util-is": "^1.0.2",
     "dotenv": "^8.2.0",
