@@ -1,22 +1,15 @@
 import koa from 'koa';
-import koaRouter from 'koa-router';
 import mount from 'koa-mount';
-
-const home = new koa();
-home.use(async (ctx, next) => {
-  await next();
-  ctx.body = 'home page';
-});
-
-const version = new koa();
-version.use(async (ctx, next) => {
-  await next();
-  ctx.body = process.env.npm_package_version;
-});
+import * as api from './api';
+import * as errorHandler from './error-handler';
+import { throws } from 'assert';
+import * as auth from './auth';
 
 const app = new koa();
 
-app.use(mount('/version', version));
-app.use(mount('/', home));
+app.use(errorHandler.handler);
 
+app.use(mount('/version', api.version));
+app.use(mount('/home', api.home));
+app.use(mount('/auth', auth.auth));
 app.listen(3000);
