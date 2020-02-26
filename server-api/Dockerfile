@@ -1,14 +1,14 @@
 #Base
-FROM node:12.16.1-apline AS base
-RUN mkdir /usr/app/server-api
-
-COPY ./server-api/package.json /usr/app/server-api
+FROM node:12.16.1
 
 WORKDIR /usr/app/server-api
+
+COPY ./package.json .
+
 RUN npm install
 
-COPY ./server-api/tsconfig.json /usr/app/server-api
-COPY ./server-api/nodemon.json /usr/app/server-api
-COPY ./server-api/.env /usr/app/server-api
+COPY . .
 
-CMD ["/hello"]
+EXPOSE 3000
+
+CMD ["npm", "run", "start:prod"]

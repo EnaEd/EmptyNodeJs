@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
-    "start": "node --inspect -r dotenv/config dist/src/app.js",
+    "start": "tsc && node -r dotenv/config dist/app.js",
     "build:launch": "tsc && npm run start",
+    "start:prod": "tsc && node -r dotenv/config dist/app.js",
     "watch": "nodemon --watch src --ignore 'src/**/*.spec.ts' -e ts --exec npm run build:launch"
   },
   "prettier": {
@@ -24,20 +25,14 @@
     "exec": "tsc && node --inspect -r dotenv/config dist/app.js"
   },
   "dependencies": {
-    "@types/koa-mount": "^4.0.0",
+    "@types/koa": "^2.11.2",
     "core-util-is": "^1.0.2",
     "dotenv": "^8.2.0",
-    "koa": "^2.11.0",
-    "koa-mount": "^4.0.0",
-    "koa-router": "^8.0.8"
+    "koa": "^2.11.0"
   },
   "devDependencies": {
-    "@types/koa": "2.0.45",
-    "@types/koa-router": "^7.0.28",
     "@types/node": "^13.7.1",
-    "@types/koa-mount": "3.0.1",
     "nodemon": "^2.0.2",
-    "tslint": "^6.0.0",
     "typescript": "^3.7.5"
   }
 }
