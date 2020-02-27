@@ -1,13 +1,10 @@
 import koa from 'koa';
 import router from 'koa-route';
-import jwt from 'jsonwebtoken';
+
 import bodyParser from 'koa-bodyparser';
 import user from './user';
 
 export const auth = new koa();
-
-const payload = { sub: 1 };
-const secret = process.env.JWT_SECRET || 'secret';
 
 auth.use(bodyParser());
 auth.use(
@@ -28,8 +25,34 @@ auth.use(
       email: email,
       password: password,
     });
+    (newUser as any).setPassword(password);
     newUser.save();
-    const token = jwt.sign(payload, secret);
-    ctx.body = `user->${newUser}\ntoken-> ${token}`;
+    const payload = {
+      subjectId: newUser.id,
+      name: displayName,
+      email: email,
+    };
+    const token = (newUser as any).generateJWT();
+    ctx.body = `${newUser}\n${token}`;
+  }),
+);
+auth.use(
+  router.post('/signin', async (ctx, next) => {
+    const { displayName, email, password } = ctx.request.body;
+    if (!email) {
+      ctx.throw(422, process.env.emailrequired);
+    }
+    if (!password) {
+      ctx.throw(422, process.env.passwordRequired);
+    }
+    const loggedUser = await user.findOne({ email: email });
+    if (!loggedUser) {
+      ctx.throw(422, process.env.userNotExists);
+    }
+    if (!(loggedUser as any).checkPassword(password)) {
+      ctx.throw(401, process.env.unauthorized);
+    }
+    const token = (loggedUser as any).generateJWT();
+    ctx.body = `${loggedUser}\n${token}`;
   }),
 );
