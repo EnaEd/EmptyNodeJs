@@ -40,14 +40,15 @@ userSchema.methods.checkPassword = function(password: any) {
 
 userSchema.methods.generateJWT = function() {
   const today = new Date();
-  const expireDate = new Date(today).setDate(today.getDate() + 1);
+  //const expireDate = new Date(today).setDate(today.getDate() + 1);
   return jwt.sign(
     {
       email: this.email,
       id: this._id,
-      exp: new Date(expireDate).getTime() / 1000,
+      //exp: new Date(expireDate).getTime() / 1000,
     },
     process.env.jwtSecret,
+    { expiresIn: '1m' },
   );
 };
 

@@ -5,6 +5,7 @@ import * as errorHandler from './error-handler';
 import * as auth from './auth';
 import mongoose from 'mongoose';
 import 'dotenv/config';
+import { authenticated } from './auth/authenticated';
 
 const app = new koa();
 mongoose.Promise = Promise; // Просим Mongoose использовать стандартные Промисы
@@ -16,9 +17,9 @@ mongoose.connect('mongodb://localhost/test', {
 
 app.use(errorHandler.handler);
 
-app.use(mount('/version', api.version));
-app.use(mount('/home', api.home));
 app.use(mount('/auth', auth.auth));
+app.use(mount('/home', api.home));
+app.use(mount('/version', api.version));
 
 app.listen(3000);
 mongoose.connect(process.env['mongoConnectionString'], {

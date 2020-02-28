@@ -1,6 +1,6 @@
+import * as authenticated from './authenticated';
 import koa from 'koa';
-import router from 'koa-route';
-
+import route from 'koa-route';
 import bodyParser from 'koa-bodyparser';
 import user from './user';
 
@@ -8,7 +8,7 @@ export const auth = new koa();
 
 auth.use(bodyParser());
 auth.use(
-  router.post('/signup', async (ctx, next) => {
+  route.post('/signup', async (ctx, next) => {
     const { displayName, email, password } = ctx.request.body;
 
     if (!email) {
@@ -37,7 +37,7 @@ auth.use(
   }),
 );
 auth.use(
-  router.post('/signin', async (ctx, next) => {
+  route.post('/signin', async (ctx, next) => {
     const { displayName, email, password } = ctx.request.body;
     if (!email) {
       ctx.throw(422, process.env.emailrequired);
