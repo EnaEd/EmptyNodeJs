@@ -1,25 +1,27 @@
 import koa from 'koa';
 import mount from 'koa-mount';
+import routerKoa from 'koa-router';
 import * as api from './api';
 import * as errorHandler from './error-handler';
 import * as auth from './auth';
 import mongoose from 'mongoose';
 import 'dotenv/config';
-import { authenticated } from './auth/authenticated';
 
 const app = new koa();
-mongoose.Promise = Promise; // Просим Mongoose использовать стандартные Промисы
-mongoose.set('debug', true); // Просим Mongoose писать все запросы к базе в консоль. Удобно для отладки кода
+//const router = new routerKoa();
+
+mongoose.Promise = Promise;
+mongoose.set('debug', true);
 mongoose.connect('mongodb://localhost/test', {
   useUnifiedTopology: true,
   useNewUrlParser: true,
 });
 
 app.use(errorHandler.handler);
+//app.use(router.routes()).use(router.allowedMethods());
 
 app.use(mount('/auth', auth.auth));
 app.use(mount('/home', api.home));
-app.use(mount('/version', api.version));
 
 app.listen(3000);
 mongoose.connect(process.env['mongoConnectionString'], {

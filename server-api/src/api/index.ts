@@ -1,13 +1,24 @@
+import { authenticated } from './../auth/authenticated';
+import route from 'koa-router';
 import koa from 'koa';
 
 export const home = new koa();
-home.use(async (ctx, next) => {
+
+const router = new route();
+
+router.get('/version', authenticated, async (ctx, next) => {
+  await next();
+  ctx.body = process.env.npm_package_version;
+});
+
+router.get('/', async (ctx, next) => {
   await next();
   ctx.body = 'home page';
 });
 
-export const version = new koa();
-version.use(async (ctx, next) => {
-  await next();
-  ctx.body = process.env.npm_package_version;
-});
+// home.use(async (ctx, next) => {
+//   await next();
+//   ctx.body = 'home page';
+// });
+
+home.use(router.routes()).use(router.allowedMethods());

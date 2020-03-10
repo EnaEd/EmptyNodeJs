@@ -8,9 +8,6 @@ export const authenticated = async (ctx: any, next: any) => {
   const token = ctx.headers.authorization.split(' ')[1];
   try {
     ctx.request.jwtPayload = jwt.verify(token, process.env.jwtSecret);
-    console.log(
-      `now->${new Date()}\nexp->${ctx.request.jwtPayload.exp}`,
-    );
   } catch (err) {
     ctx.throw(err.status || 401, process.env.unauthorized);
   }
