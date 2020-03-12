@@ -1,0 +1,30 @@
+{
+  "name": "workers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/app",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "start": "tsc && node -r dotenv/config dist/app.js",
+    "build:launch": "tsc && npm run start",
+    "start:prod": "tsc && node -r dotenv/config dist/app.js",
+    "watch": "nodemon --watch src --ignore 'src/**/*.spec.ts' -e ts --exec npm run build:launch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/koa": "^2.11.2",
+    "@types/koa-mount": "^4.0.0",
+    "@types/koa-router": "^7.4.0",
+    "nodemon": "^2.0.2"
+  },
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "koa": "^2.11.0",
+    "koa-mount": "^4.0.0",
+    "koa-router": "^8.0.8",
+    "typescript": "^3.8.3"
+  }
+}
